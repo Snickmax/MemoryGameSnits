@@ -1,0 +1,159 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #e0f7fa; /* Color de fondo suave */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #00695c; /* Verde oscuro */
+    margin-bottom: 20px;
+    font-size: 2.5em; /* Tamaño de fuente más grande */
+}
+
+label {
+    font-size: 1.2em; /* Tamaño de fuente mayor */
+    color: #004d40; /* Color del texto */
+}
+.theme-selection {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.theme {
+    width: 60px; /* Ancho del cuadro */
+    height: 60px; /* Alto del cuadro */
+    background-color: #b2ebf2; /* Color de fondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em; /* Tamaño de fuente */
+    margin: 0 5px; /* Espacio entre cuadros */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 10px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; /* Transiciones */
+}
+
+.theme:hover {
+    background-color: #4db6ac; /* Color al pasar el ratón */
+    border-color: #00796b; /* Borde al pasar el ratón */
+}
+
+.theme.selected {
+    border-color: #004d40; /* Color del borde cuando está seleccionado */
+}
+
+select {
+    font-size: 1.2em; /* Tamaño de fuente mayor */
+    padding: 10px; /* Espaciado interno */
+    border: 2px solid #00796b; /* Color del borde */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #b2ebf2; /* Color de fondo */
+    color: #004d40; /* Color del texto */
+    transition: border-color 0.3s, color 0.3s; /* Transición para el borde y color */
+    margin: 0.05em;
+    appearance: none; /* Quitar la apariencia por defecto del select */
+    -moz-appearance: none; /* Para Firefox */
+    -webkit-appearance: none; /* Para Chrome/Safari */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="%2300695c"><polygon points="0,0 10,0 5,10"/></svg>'); /* Cambia el color de la flecha al pasar el ratón */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Ubicación de la flecha */
+    background-size: 10px; /* Tamaño de la flecha */
+}
+
+select:hover {
+    border-color: #004d40; /* Color del borde al pasar el ratón */
+    color: #00695c; /* Cambia el color del texto al pasar el ratón */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="%23004d40"><polygon points="0,0 10,0 5,10"/></svg>'); /* Flecha personalizada */
+}
+
+button {
+    font-size: 1.2em; /* Tamaño de fuente mayor */
+    margin: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    background-color: #00796b; /* Color del botón */
+    color: white;
+    transition: background-color 0.3s, transform 0.3s; /* Transición para efecto hover */
+}
+
+button:hover {
+    background-color: #004d40; /* Color al pasar el ratón */
+    transform: scale(1.05); /* Efecto de zoom */
+}
+
+p {
+    font-size: 1.5em; /* Tamaño de fuente mayor para los textos */
+    color: #004d40; /* Color del texto */
+}
+
+.grid-container {
+    display: grid;
+    gap: 5px; /* Reducción del espacio entre cartas */
+    justify-content: center;
+    margin-top: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Acomoda las cartas */
+}
+
+.grid-item {
+    width: 60px; /* Tamaño de las cartas */
+    height: 60px;
+    background-color: #80deea; /* Color de fondo de las cartas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em; /* Tamaño de fuente para el contenido de las cartas */
+    cursor: pointer;
+    border: 2px solid #004d40; /* Bordes de las cartas */
+    border-radius: 10px; /* Bordes redondeados */
+    transition: background-color 0.3s, transform 0.2s; /* Transición para efecto hover */
+}
+
+.grid-item.revealed {
+    background-color: #4db6ac; /* Color de fondo al revelar */
+    transform: scale(1.1); /* Efecto de zoom al revelar */
+}
+
+.grid-item.matched {
+    background-color: #b2dfdb; /* Color de fondo de cartas emparejadas */
+    transform: scale(1.1); /* Efecto de zoom al emparejar */
+}
+
+.grid-item:hover {
+    background-color: #26c6da; /* Color al pasar el ratón sobre la carta */
+}
+
+/* Modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Posición fija en la pantalla */
+    z-index: 1; /* Superposición por encima del contenido */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro transparente */
+}
+
+.modal-content {
+    background-color: #ffffff; /* Fondo blanco para el modal */
+    margin: 15% auto; /* Centrado vertical y horizontal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ancho del modal */
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del modal */
+}
+
+#bestStats {
+    color: #00796b; /* Color de las estadísticas */
+    font-size: 1.2em; /* Tamaño de fuente para estadísticas */
+    margin-top: 10px;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h1>Juego de Memoria</h1>
+
+    <!-- Modal inicial -->
+    <div id="startModal" class="modal">
+        <div class="modal-content">
+            <h2>Configuración del Juego</h2>
+            <label for="grid-size">Selecciona el tamaño del tablero:</label>
+            <select id="grid-size">
+                <option value="2">2x2</option>
+                <option value="4">4x4</option>
+                <option value="6">6x6</option>
+                <option value="8">8x8</option>
+                <option value="10">10x10</option>
+            </select>
+            <br>
+            <label>Selecciona el tema:</label>
+            <div id="theme-selection" class="theme-selection">
+                <div class="theme" data-theme="numbers">1</div>
+                <div class="theme" data-theme="letters">A</div>
+                <div class="theme" data-theme="symbols">@</div>
+                <div class="theme" data-theme="emojis">😀</div>
+            </div>
+            <br>
+            <button onclick="startGame()">Iniciar Juego</button>
+            <p id="bestStats"></p>
+        </div>
+    </div>
+
+
+    <p>Movimientos: <span id="moves">0</span></p>
+    <p>Tiempo: <span id="time">0</span> segundos</p>
+    <p id="status"></p>
+
+    <div id="game-board" class="grid-container"></div>
+
+    <button id="exitButton" onclick="exitGame()">Salir</button> <!-- Botón de salir visible solo durante el juego -->
+
+    <!-- Modal para mostrar estadísticas al ganar -->
+    <div id="winModal" class="modal">
+        <div class="modal-content">
+            <h2>¡Felicidades, has ganado!</h2>
+            <p id="finalStats"></p>
+            <button onclick="startGame()">Jugar de nuevo</button>
+            <button onclick="openStartModal()">Cambiar modo</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Mostrar modal inicial
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('startModal').style.display = "block";
+            const defaultSize = 2; // Tamaño por defecto
+            updateBestStats(defaultSize); // Actualiza las mejores estadísticas al cargar
+        });
+
+
+        document.getElementById('grid-size').addEventListener('change', function () {
+            const selectedSize = this.value;
+            updateBestStats(selectedSize);
+        });
+        document.querySelectorAll('.theme').forEach(theme => {
+            theme.addEventListener('click', function () {
+                // Elimina la clase "selected" de todos los temas
+                document.querySelectorAll('.theme').forEach(t => t.classList.remove('selected'));
+
+                // Añade la clase "selected" al tema elegido
+                this.classList.add('selected');
+            });
+        });
+
+    </script>
+</body>
+
+</html>
